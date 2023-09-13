@@ -4,6 +4,6 @@ import org.nmartinez.springcloud.backinventory.domain.responses.CategoryResponse
 import org.springframework.http.ResponseEntity;
 
 public interface CategoryService {
-
-    public ResponseEntity<CategoryResponseRest> search();
+    public ResponseEntity<CategoryResponseRest> list();
+    public ResponseEntity<CategoryResponseRest> listOne(Long id);
 }
