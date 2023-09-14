@@ -26,11 +26,6 @@ public class CategoryRestController {
         return response;
     }
 
-    /**
-     * save categories
-     * @param category
-     * @return
-     */
     @PostMapping("/categories")
     public ResponseEntity<CategoryResponseRest> add(@RequestBody CategoryEntity category) {
         ResponseEntity<CategoryResponseRest> response = categorySrv.add(category);
@@ -38,15 +33,16 @@ public class CategoryRestController {
         return response;
     }
 
-    /**
-     * update cateories
-     * @param id
-     * @param category
-     * @return
-     */
     @PutMapping("/categories/{id}")
     public ResponseEntity<CategoryResponseRest> update(@PathVariable Long id, @RequestBody CategoryEntity category) {
         ResponseEntity<CategoryResponseRest> response = categorySrv.update(id, category);
+
+        return response;
+    }
+
+    @DeleteMapping("/categories/{id}")
+    public ResponseEntity<CategoryResponseRest> delete(@PathVariable Long id) {
+        ResponseEntity<CategoryResponseRest> response = categorySrv.delete(id);
 
         return response;
     }

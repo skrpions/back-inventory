@@ -9,4 +9,5 @@ public interface CategoryService {
     public ResponseEntity<CategoryResponseRest> listOne(Long id);
     public ResponseEntity<CategoryResponseRest> add(CategoryEntity category);
     public ResponseEntity<CategoryResponseRest> update(Long id, CategoryEntity category);
+    public ResponseEntity<CategoryResponseRest> delete(Long id);
 }
