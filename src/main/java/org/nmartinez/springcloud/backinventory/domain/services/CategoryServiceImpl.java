@@ -67,4 +67,33 @@ public class CategoryServiceImpl implements CategoryService {
 
     }
 
+    @Override
+    @Transactional
+    public ResponseEntity<CategoryResponseRest> add(CategoryEntity category) {
+
+        CategoryResponseRest response = new CategoryResponseRest();
+        List<CategoryEntity> list = new ArrayList<>();
+
+        try {
+            CategoryEntity categoryAdded = categoryDao.save(category);
+
+            if (categoryAdded != null){
+                list.add(categoryAdded);
+                response.getCategoryResponse()
+                        .setCategory(list);
+                response.setMetadata("Ok", "200", "Categoría registrada!");
+            } else{
+                response.setMetadata("nOk", "-1", "Categoría no registrada!");
+                return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.BAD_REQUEST);
+            }
+        }
+        catch (Exception e) {
+            response.setMetadata("nOk", "-1", "Falló al intentar registrar!");
+            e.getStackTrace();
+            return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.OK);
+
+    }
+
 }

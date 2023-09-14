@@ -1,13 +1,11 @@
 package org.nmartinez.springcloud.backinventory.domain.controllers;
 
+import org.nmartinez.springcloud.backinventory.domain.entities.CategoryEntity;
 import org.nmartinez.springcloud.backinventory.domain.responses.CategoryResponseRest;
 import org.nmartinez.springcloud.backinventory.domain.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -27,4 +25,12 @@ public class CategoryRestController {
 
         return response;
     }
+
+    @PostMapping("/categories")
+    public ResponseEntity<CategoryResponseRest> add(@RequestBody CategoryEntity category) {
+        ResponseEntity<CategoryResponseRest> response = categorySrv.add(category);
+
+        return response;
+    }
+
 }
