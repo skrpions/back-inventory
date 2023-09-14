@@ -8,4 +8,5 @@ public interface CategoryService {
     public ResponseEntity<CategoryResponseRest> list();
     public ResponseEntity<CategoryResponseRest> listOne(Long id);
     public ResponseEntity<CategoryResponseRest> add(CategoryEntity category);
+    public ResponseEntity<CategoryResponseRest> update(Long id, CategoryEntity category);
 }
