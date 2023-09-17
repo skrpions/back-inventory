@@ -26,14 +26,32 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(readOnly = true)
     public ResponseEntity<ProductResponseRest> list() {
         ProductResponseRest response = new ProductResponseRest();
+        List<ProductEntity> list = new ArrayList<>();
+        List<ProductEntity> listAux = new ArrayList<>();
 
         try {
-            List<ProductEntity> product = (List<ProductEntity>) productDao.findAll();
-            response.getProductResponse().setProduct(product);
-            response.setMetadata("Ok", "00", "Success!");
+            // Search products
+            listAux = (List<ProductEntity>) productDao.findAll();
+            //Optional<ProductEntity> product = productDao.findByNameLike(name);
+
+            if (listAux.size() > 0) {
+                // Descompressed the images of all the products you find.
+                listAux.stream().forEach((product) -> {
+                    byte[] imageDescompressed = Util.decompressZLib(product.getPicture());
+                    product.setPicture(imageDescompressed);
+
+                    list.add(product);
+                });
+                response.getProductResponse()
+                        .setProduct(list);
+                response.setMetadata("Ok", "200", "Products Found!");
+            } else{
+                response.setMetadata("nOk", "-1", "Products Not Found!");
+                return new ResponseEntity<ProductResponseRest>(response, HttpStatus.NOT_FOUND);
+            }
         }
         catch (Exception e) {
-            response.setMetadata("nOk", "-1", "Query failed!");
+            response.setMetadata("nOk", "-1", "Failed to search!");
             e.getStackTrace();
             return new ResponseEntity<ProductResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }

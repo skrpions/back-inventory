@@ -19,6 +19,13 @@ public class ProductRestController {
 
     @Autowired private ProductService productSrv;
 
+    @GetMapping("/products")
+    public ResponseEntity<ProductResponseRest> list() {
+        ResponseEntity<ProductResponseRest> response = productSrv.list();
+
+        return response;
+    }
+
     @GetMapping("/products/{id}")
     public ResponseEntity<ProductResponseRest> listProductById(@PathVariable Long id) {
         ResponseEntity<ProductResponseRest> response = productSrv.listOne(id);
