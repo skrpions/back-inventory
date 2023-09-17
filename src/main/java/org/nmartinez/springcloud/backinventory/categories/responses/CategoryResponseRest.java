@@ -1,7 +1,8 @@
-package org.nmartinez.springcloud.backinventory.domain.responses;
+package org.nmartinez.springcloud.backinventory.categories.responses;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.nmartinez.springcloud.backinventory.shared.responses.ResponseRest;
 
 @Getter
 @Setter

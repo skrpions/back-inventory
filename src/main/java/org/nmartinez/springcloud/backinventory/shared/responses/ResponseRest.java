@@ -1,4 +1,4 @@
-package org.nmartinez.springcloud.backinventory.domain.responses;
+package org.nmartinez.springcloud.backinventory.shared.responses;
 
 import java.util.ArrayList;
 import java.util.HashMap;

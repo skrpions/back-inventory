@@ -1,7 +1,7 @@
-package org.nmartinez.springcloud.backinventory.domain.services;
+package org.nmartinez.springcloud.backinventory.categories.services;
 
-import org.nmartinez.springcloud.backinventory.domain.entities.CategoryEntity;
-import org.nmartinez.springcloud.backinventory.domain.responses.CategoryResponseRest;
+import org.nmartinez.springcloud.backinventory.categories.entities.CategoryEntity;
+import org.nmartinez.springcloud.backinventory.categories.responses.CategoryResponseRest;
 import org.springframework.http.ResponseEntity;
 
 public interface CategoryService {

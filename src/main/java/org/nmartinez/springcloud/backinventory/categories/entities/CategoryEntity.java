@@ -1,9 +1,8 @@
-package org.nmartinez.springcloud.backinventory.domain.entities;
+package org.nmartinez.springcloud.backinventory.categories.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 @Data // Reduce el código repetitivo como la implementación de getters y setters

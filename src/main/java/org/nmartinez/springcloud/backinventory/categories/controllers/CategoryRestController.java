@@ -1,8 +1,8 @@
-package org.nmartinez.springcloud.backinventory.domain.controllers;
+package org.nmartinez.springcloud.backinventory.categories.controllers;
 
-import org.nmartinez.springcloud.backinventory.domain.entities.CategoryEntity;
-import org.nmartinez.springcloud.backinventory.domain.responses.CategoryResponseRest;
-import org.nmartinez.springcloud.backinventory.domain.services.CategoryService;
+import org.nmartinez.springcloud.backinventory.categories.entities.CategoryEntity;
+import org.nmartinez.springcloud.backinventory.categories.responses.CategoryResponseRest;
+import org.nmartinez.springcloud.backinventory.categories.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
