@@ -25,6 +25,13 @@ public class ProductRestController {
         return response;
     }
 
+    @GetMapping("/products/filter/{name}")
+    public ResponseEntity<ProductResponseRest> listProductByName(@PathVariable String name) {
+        ResponseEntity<ProductResponseRest> response = productSrv.listByName(name);
+
+        return response;
+    }
+
     @PostMapping("/products")
     public ResponseEntity<ProductResponseRest> add(
             @RequestParam("picture") MultipartFile picture,

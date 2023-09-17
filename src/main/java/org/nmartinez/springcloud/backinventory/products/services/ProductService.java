@@ -9,6 +9,7 @@ public interface ProductService {
 
     public ResponseEntity<ProductResponseRest> list();
     public ResponseEntity<ProductResponseRest> listOne(Long id);
+    public ResponseEntity<ProductResponseRest> listByName(String name);
     public ResponseEntity<ProductResponseRest> add(ProductEntity product, Long categoryId);
     public ResponseEntity<ProductResponseRest> update(Long id, ProductEntity product);
     public ResponseEntity<ProductResponseRest> delete(Long id);
