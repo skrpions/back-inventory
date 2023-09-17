@@ -134,6 +134,7 @@ public class CategoryServiceImpl implements CategoryService {
             return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.OK);
+
     }
 
     @Override
@@ -153,6 +154,7 @@ public class CategoryServiceImpl implements CategoryService {
             return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.OK);
+
     }
 
 }

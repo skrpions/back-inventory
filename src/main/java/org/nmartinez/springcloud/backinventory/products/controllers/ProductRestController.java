@@ -18,6 +18,13 @@ public class ProductRestController {
 
     @Autowired private ProductService productSrv;
 
+    @GetMapping("/products/{id}")
+    public ResponseEntity<ProductResponseRest> listProductById(@PathVariable Long id) {
+        ResponseEntity<ProductResponseRest> response = productSrv.listOne(id);
+
+        return response;
+    }
+
     @PostMapping("/products")
     public ResponseEntity<ProductResponseRest> add(
             @RequestParam("picture") MultipartFile picture,
