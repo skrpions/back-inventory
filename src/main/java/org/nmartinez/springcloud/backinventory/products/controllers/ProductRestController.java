@@ -1,5 +1,6 @@
 package org.nmartinez.springcloud.backinventory.products.controllers;
 
+import org.nmartinez.springcloud.backinventory.categories.responses.CategoryResponseRest;
 import org.nmartinez.springcloud.backinventory.products.entities.ProductEntity;
 import org.nmartinez.springcloud.backinventory.products.responses.ProductResponseRest;
 import org.nmartinez.springcloud.backinventory.products.services.ProductService;
@@ -47,6 +48,13 @@ public class ProductRestController {
         product.setPicture(Util.compressZLib(picture.getBytes()));
 
         ResponseEntity<ProductResponseRest> response = productSrv.add(product, categoryID);
+
+        return response;
+    }
+
+    @DeleteMapping("/products/{id}")
+    public ResponseEntity<ProductResponseRest> delete(@PathVariable Long id) {
+        ResponseEntity<ProductResponseRest> response = productSrv.delete(id);
 
         return response;
     }
