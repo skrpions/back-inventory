@@ -169,31 +169,48 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public ResponseEntity<ProductResponseRest> update(Long id, ProductEntity product) {
+    public ResponseEntity<ProductResponseRest> update(Long id, ProductEntity product, Long categoryId) {
         ProductResponseRest response = new ProductResponseRest();
         List<ProductEntity> list = new ArrayList<>();
 
         try {
-            // Search product by id
-            Optional<ProductEntity> productSearch = productDao.findById(id);
+            // Search category by id
+            Optional<CategoryEntity> category = categoryDao.findById(categoryId);
 
-            if (productSearch.isPresent()){
+            if (category.isPresent()){
                 // I will update the record
+                product.setCategory(category.get());
+            } else{
+                response.setMetadata("nOk", "-1", "Product Not Found!");
+                return new ResponseEntity<ProductResponseRest>(response, HttpStatus.NOT_FOUND);
+            }
+
+            // Search product to update
+            Optional<ProductEntity> productSearch = productDao.findById(id);
+            if (productSearch.isPresent()) {
+
+                //byte[] imageDescompressed = Util.decompressZLib(product.getPicture());
+
+                // I will update the record
+                productSearch.get().setAccont(product.getAccont());
+                productSearch.get().setCategory(product.getCategory());
                 productSearch.get().setName(product.getName());
+                productSearch.get().setPicture(product.getPicture());
                 productSearch.get().setPrice(product.getPrice());
 
-                ProductEntity productToUpdate = productDao.save(productSearch.get());
+                // Save the product in DB
+                ProductEntity productoToUpdate = productDao.save(productSearch.get());
 
-                if (productToUpdate != null) {
-                    list.add(productToUpdate);
+                if (productoToUpdate != null) {
+                    list.add(productoToUpdate);
                     response.getProductResponse()
                             .setProduct(list);
                     response.setMetadata("Ok", "200", "Updated Product!");
-                }
-                else{
-                    response.setMetadata("nOk", "-1", "Not Updated Product!");
+                } else {
+                    response.setMetadata("nOk", "-1", "Product Not Updated!");
                     return new ResponseEntity<ProductResponseRest>(response, HttpStatus.BAD_REQUEST);
                 }
+
             } else{
                 response.setMetadata("nOk", "-1", "Product Not Found!");
                 return new ResponseEntity<ProductResponseRest>(response, HttpStatus.NOT_FOUND);
