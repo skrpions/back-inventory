@@ -27,7 +27,7 @@ public class CategoryServiceImpl implements CategoryService {
         try {
             List<CategoryEntity> category = (List<CategoryEntity>) categoryDao.findAll();
             response.getCategoryResponse().setCategory(category);
-            response.setMetadata("Ok", "00", "Respuesta Exitosa!");
+            response.setMetadata("Ok", "200", "Respuesta Exitosa!");
         }
         catch (Exception e) {
             response.setMetadata("nOk", "-1", "Falló la consulta!");
@@ -81,7 +81,7 @@ public class CategoryServiceImpl implements CategoryService {
                 list.add(categoryAdded);
                 response.getCategoryResponse()
                         .setCategory(list);
-                response.setMetadata("Ok", "200", "Categoría registrada!");
+                response.setMetadata("Ok", "201", "Categoría registrada!");
             } else{
                 response.setMetadata("nOk", "-1", "Categoría no registrada!");
                 return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.BAD_REQUEST);
@@ -145,7 +145,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         try {
             categoryDao.deleteById(id);
-            response.setMetadata("Ok", "00", "Registro eliminado!");
+            response.setMetadata("Ok", "200", "Registro eliminado!");
 
         }
         catch (Exception e) {

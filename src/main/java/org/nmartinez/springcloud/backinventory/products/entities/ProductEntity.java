@@ -19,7 +19,7 @@ public class ProductEntity implements Serializable {
     private Long id;
     private String name;
     private int price;
-    private int accont;
+    private int account;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

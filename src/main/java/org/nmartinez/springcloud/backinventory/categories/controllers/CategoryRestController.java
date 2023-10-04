@@ -1,11 +1,15 @@
 package org.nmartinez.springcloud.backinventory.categories.controllers;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.nmartinez.springcloud.backinventory.categories.entities.CategoryEntity;
 import org.nmartinez.springcloud.backinventory.categories.responses.CategoryResponseRest;
 import org.nmartinez.springcloud.backinventory.categories.services.CategoryService;
+import org.nmartinez.springcloud.backinventory.shared.utils.CategoryExcelExporter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @CrossOrigin(origins = {"http://localhost:4200"}) // CORS, solo recibiré peticiones de este servidor
 @RestController
@@ -46,5 +50,18 @@ public class CategoryRestController {
         ResponseEntity<CategoryResponseRest> response = categorySrv.delete(id);
 
         return response;
+    }
+
+    @GetMapping ("/categories/export/excel")
+            public void exportToExcel (HttpServletResponse response) throws IOException {
+        response.setContentType ("application/octet-stream");
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=result_category.xlsx";
+        response. setHeader (headerKey, headerValue);
+        ResponseEntity<CategoryResponseRest> categoryResponse = categorySrv.list();
+        CategoryExcelExporter excelExporter = new CategoryExcelExporter (
+                categoryResponse.getBody().getCategoryResponse().getCategory());
+
+        excelExporter.export(response);
     }
 }

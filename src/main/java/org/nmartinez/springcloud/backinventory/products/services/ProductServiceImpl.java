@@ -152,7 +152,7 @@ public class ProductServiceImpl implements ProductService {
                 list.add(productAdded);
                 response.getProductResponse()
                         .setProduct(list);
-                response.setMetadata("Ok", "200", "Registered Product!");
+                response.setMetadata("Ok", "201", "Registered Product!");
             } else{
                 response.setMetadata("nOk", "-1", "Unregistered Product!");
                 return new ResponseEntity<ProductResponseRest>(response, HttpStatus.BAD_REQUEST);
@@ -192,7 +192,7 @@ public class ProductServiceImpl implements ProductService {
                 //byte[] imageDescompressed = Util.decompressZLib(product.getPicture());
 
                 // I will update the record
-                productSearch.get().setAccont(product.getAccont());
+                productSearch.get().setAccount(product.getAccount());
                 productSearch.get().setCategory(product.getCategory());
                 productSearch.get().setName(product.getName());
                 productSearch.get().setPicture(product.getPicture());
@@ -232,7 +232,7 @@ public class ProductServiceImpl implements ProductService {
 
         try {
             productDao.deleteById(id);
-            response.setMetadata("Ok", "00", "Deleted Product!");
+            response.setMetadata("Ok", "200", "Deleted Product!");
 
         }
         catch (Exception e) {
